@@ -35,16 +35,7 @@ const Search = () => {
               <button type="button" onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">検索</button>
             </div>
           </form>
-
           <div>
-
-
-
-
-
-
-
-
 
 
 
