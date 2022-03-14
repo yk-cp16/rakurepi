@@ -43,21 +43,16 @@ const RecipeTop = () => {
   }, []);
 
   const onClickFavoriteButton = async (id: number, isFavorite: boolean) => {
-    if (isFavorite === false) {
-      const res = await favoriteRecipe({ id, accessToken });
-      if (res.response == false) {
-        return <div>保存できていません...</div>;
-      } else { return location.reload(); }
 
-    } else {
+    const res = isFavorite === false
+      ? await favoriteRecipe({ id, accessToken })
+      : await unfavoriteRecipe({ id, accessToken });
 
-      const res = await unfavoriteRecipe({ id, accessToken });
-      if (res.response == false) {
-        return <div>保存できていません...</div>;
-      } else {
-        return location.reload();
-      }
+    if (res.response == false) {
+      return <div>保存できていません...</div>;
     }
+    init();
+    return;
   }
 
   return (
