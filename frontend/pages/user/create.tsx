@@ -96,7 +96,7 @@ const UserRecipeCreate = () => {
 
     return (
         <UserDefaultLayout>
-            <h1 className="text-center text-4xl mt-3 mb-3 font-semibold tracking-wider">
+            <h1 className="text-center text-4xl mt-6 mb-3 font-semibold tracking-wider">
                 レシピ新規投稿
             </h1>
             <div className="flex justify-center">

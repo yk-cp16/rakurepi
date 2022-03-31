@@ -19,9 +19,9 @@ export const UserDefaultLayout = ({ children }) => {
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                             </div>
                             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="hidden sm:block sm:ml-30">
-                                    <div className="flex space-x-60">
-                                        <a href="/user/" className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">YR</a>
+                                <div className="w-full sm:ml-30">
+                                    <div className="flex justify-between">
+                                        <a href="/user/" className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">ラクレピ</a>
                                         <a href="/user/create" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">新規作成</a>
                                         <a href="/user/favorite" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
                                         <a href="/login" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ログアウト</a>

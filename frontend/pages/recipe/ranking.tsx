@@ -20,7 +20,7 @@ const Ranking = () => {
 
   return (
     <DefaultLayout>
-      <h1 className="text-center text-5xl font-semibold tracking-wider">
+      <h1 className="text-center mt-6 text-5xl font-semibold tracking-wider">
         コスパレシピランキング(TOP3)
       </h1>
       <main className={styles.main} >
