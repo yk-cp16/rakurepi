@@ -34,7 +34,7 @@ const UserFavorite = () => {
 
   return (
     <DefaultLayout>
-      <h1 className="text-center text-5xl font-semibold tracking-wider">
+      <h1 className="text-center mt-6 text-5xl font-semibold tracking-wider">
         お気に入りレシピ
       </h1>
       <main className={styles.main} >

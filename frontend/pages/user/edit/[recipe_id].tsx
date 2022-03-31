@@ -32,14 +32,6 @@ const UserRecipeEdit = () => {
 
     const [inputIngredients, setInputIngredients] = useState<InputIngredient[]>(initInputIngredients);
 
-
-    // const numbers = [1, 2, 3];
-    // const numbers2 = [4, 5, 6];
-    // ...numbers => 1, 2, 3
-    // [...numbers] => [1, 2, 3]
-    // [...numbers, ...numbers2] => [1, 2, 3, 4, 5, 6]
-    // [0, ...numbers] => [0, 1, 2, 3]
-
     const onChangeIngredientName = (index: number) => {
         return (event) => {
             const ingredients = [...inputIngredients];
@@ -74,19 +66,12 @@ const UserRecipeEdit = () => {
             const loginRes = await fetchUserLogin(email, password);
             console.log('loginRes', loginRes);
             const { access_token } = loginRes;
-            // console.log('accessToken', access_token);
-
             const res = await editRecipe({ id: Number(recipe_id), accessToken: access_token });
-            // console.log('access_token', access_token);
-            // console.log('editRes', res);
             const { recipe } = res;
-            // console.log('recipe1', recipe);
             const { title, description, cost, image, recipe_ingredients } = recipe;
             const ingredients = recipe_ingredients.map(({ name, amount }) => {
                 return { name, amount };
             })
-            // console.log('recipe_ingredients', recipe_ingredients);
-
 
             setRecipeImagePath(image);
             setCost(cost);
@@ -110,8 +95,6 @@ const UserRecipeEdit = () => {
         const res = await updateRecipe({
             id, title, description, imageFile, cost, accessToken, ingredients,
         });
-        // setRecipeImagePath(res.resresponse)
-        // console.log('res.response', res.resresponse);
 
         if (res.response == false) {
             return <div>保存できていません...</div>;
@@ -119,7 +102,6 @@ const UserRecipeEdit = () => {
         alert('レシピ編集完了しました。');
         setIsUpdating(false);
     }
-
 
     if (isLoading) {
         return (
@@ -131,12 +113,10 @@ const UserRecipeEdit = () => {
         setImageFile(e.target.files[0]);
         console.log('e.target.files[0]', e.target.files[0]);
     };
-    // console.log('imageFile', imageFile);
-
 
     return (
         <UserDefaultLayout>
-            <h1 className="text-center text-4xl mt-3 mb-3 font-semibold tracking-wider">
+            <h1 className="text-center text-4xl mt-6 mb-3 font-semibold tracking-wider">
                 レシピ編集
             </h1>
             <div className="flex justify-center">
@@ -177,11 +157,8 @@ const UserRecipeEdit = () => {
                                     <div key={index}>
                                         <div className="flex form-group">
                                             <div className="col-md-3">
-
-                                                {/* <label>材料</label> */}
                                                 <input type='text' name={`ingredients[${index}][name]`} className="py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50 m-1" placeholder="材料名入力" value={name} onChange={onChangeIngredientName(index)} />
                                             </div>
-                                            {/* <label>数量</label> */}
                                             <div className="col-md-6">
                                                 <input type='text' name={`ingredients[${index}][amount]`} className="py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50 m-1" placeholder="数量入力(単位まで)" value={amount} onChange={onChangeIngredientAmount(index)} />
                                             </div>

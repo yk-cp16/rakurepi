@@ -49,7 +49,7 @@ const UserIndex = () => {
 
   return (
     <UserDefaultLayout>
-      <h1 className="text-center text-4xl font-semibold tracking-wide">
+      <h1 className="text-center mt-6 text-4xl font-semibold tracking-wide">
         マイページ(投稿レシピ一覧)
       </h1>
       <main className={styles.main} >
