@@ -1,5 +1,5 @@
 export const HOSTS = {
-    LOCAL: 'http://127.0.0.1:8000'
+    LOCAL: process.env.NEXT_PUBLIC_HOST
 } as const;
 
 export const ENDPOINTS = {
