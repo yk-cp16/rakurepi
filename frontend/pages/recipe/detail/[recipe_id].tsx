@@ -32,6 +32,17 @@ const RecipeShow = () => {
 
   if (recipe === null) return <div>Loading...</div>;
 
+  const recipeDescription = recipe.description;
+  // const text = 'なにぬねの\n\nはひふへほ';
+  // return (
+  //   <div>
+  //     {recipeDescription.split('\n').map(t => (
+  //       t !== '' ? <div>{t}</div> : <br />
+  //     ))}
+  //   </div>
+  // );
+
+
   return (
     <DefaultLayout>
       <h1 className="text-center text-4xl mb-3 font-semibold tracking-wider">
@@ -68,8 +79,12 @@ const RecipeShow = () => {
                 <h2>作り方</h2>
               </div>
               <div className="mt-8">
-                <div className="text-center text-2xl mt-3 mb-2">
-                  <h2>{recipe.description}{`\n`}</h2>
+                <div className="text-left text-2xl mt-3 mb-2">
+                  <h2>
+                    {recipeDescription.split('\n').map(t => (
+                      t !== '' ? <div>{t}</div> : <br />
+                    ))}
+                  </h2>
                 </div>
               </div>
             </div>

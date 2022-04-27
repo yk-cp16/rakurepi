@@ -38,6 +38,7 @@ export const UserRecipeCard = (props: RecipeCardProps) => {
 
     const handleSubmit = () => {
         onClickdeleteButton(id);
+        location.reload();
     }
 
 
@@ -47,7 +48,7 @@ export const UserRecipeCard = (props: RecipeCardProps) => {
                 <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                     <Link href={`/recipe/detail/${id}`}>
                         <a>
-                            <Image src={`http://localhost:8000/storage/image/${image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={400} height={300} />
+                            <Image src={`http://localhost:8000/storage/image/${image}`} alt="cookImage" className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
                             <div className=" flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">

@@ -130,7 +130,7 @@ const UserRecipeCreate = () => {
                                 ＋
                             </button>
                             {inputIngredients.map(({ name, amount }, index) => (
-                                <div>
+                                <div key={index}>
                                     <div className="flex form-group">
                                         <div className="col-md-3">
                                             <input type="text" name="ingredients[index][name]" className="py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50 m-1" placeholder="材料名入力" value={name} onChange={onChangeIngredientName(index)} />
@@ -146,7 +146,7 @@ const UserRecipeCreate = () => {
                         <div className="form-group row mb-3">
                             <label className="col-md-4 col-form-label text-md-right">内容</label>
                             <div className="col-md-6">
-                                <textarea name="description" rows="5" className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
+                                <textarea name="description" rows={5} className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
                                     placeholder="箇条書き入力" required value={description} onChange={(e) => setDescription(e.currentTarget.value)} />
                             </div>
                         </div>

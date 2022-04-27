@@ -40,6 +40,8 @@ const UserIndex = () => {
 
   const deleteRecipeId = async (id: number) => {
     const res = await deleteRecipe({ id, accessToken });
+    console.log('res1', res);
+
     if (res.response == true) {
       return location.reload();
     } else {

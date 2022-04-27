@@ -110,8 +110,8 @@ export const editRecipe = async (props: EditRecipeProps) => {
 }
 
 export const updateRecipe = async (props) => {
+    console.log('props', props);
     const { id, title, description, imageFile, cost, accessToken, ingredients } = props;
-    // console.log('props', props);
 
     const url = `${HOSTS.LOCAL}${ENDPOINTS.USER_UPDATE_RECIPE}`;
     // const ingredientsLoop = filteredInputIngredients.length;
@@ -194,6 +194,7 @@ export const unfavoriteRecipe = async (props) => {
 
 
 export const deleteRecipe = async (props) => {
+    // console.log('props', props);
     const { id, accessToken } = props;
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_DELETE_RECIPE
         }`, {
@@ -206,5 +207,6 @@ export const deleteRecipe = async (props) => {
         },
         body: JSON.stringify({ id }),
     });
+
     return res.json();
 }
