@@ -8,40 +8,30 @@ import { useRouter } from 'next/router';
 import { fetchUserLogin } from '../../apis/users';
 import { deleteRecipe, fetchMyRecipes, fetchRecipes } from '../../apis/recipes';
 
-
 const UserIndex = () => {
   const [recipes, setRecipes] = useState([]);
   const [accessToken, setAccessToken] = useState('');
   const router = useRouter();
-
 
   useEffect(() => {
     (async () => {
       const email = 'yu375zit@gmail.com';
       const password = 'a529gjs8int';
       const loginRes = await fetchUserLogin(email, password);
-      // loginResからacces_tokenのみ取り出すことができる
       const { access_token } = loginRes;
-
       setAccessToken(access_token);
-      // console.log('access_token', accessToken);
       const res = await fetchMyRecipes(access_token);
       if (!res.recipes) {
         router.push('/login');
         return
       }
-      console.log('res', res);
-
       const recipes = res.recipes.data;
-      console.log('recipes', recipes);
       setRecipes(recipes);
     })()
   }, []);
 
   const deleteRecipeId = async (id: number) => {
     const res = await deleteRecipe({ id, accessToken });
-    console.log('res1', res);
-
     if (res.response == true) {
       return location.reload();
     } else {
@@ -64,5 +54,4 @@ const UserIndex = () => {
     </UserDefaultLayout>
   );
 }
-
 export default UserIndex;

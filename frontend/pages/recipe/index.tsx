@@ -7,11 +7,9 @@ import Image from "next/image"
 import { fetchRecipes, fetchRecipesIndex, favoriteRecipe, unfavoriteRecipe } from '../../apis/recipes';
 import { fetchUserLogin } from '../../apis/users';
 import { useRouter } from 'next/router';
+
 const RecipeTop = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  // console.log('recipes1', recipes);
-
-
   const [accessToken, setAccessToken] = useState('');
   const router = useRouter();
 
@@ -19,35 +17,24 @@ const RecipeTop = () => {
     const email = 'yu375zit@gmail.com';
     const password = 'a529gjs8int';
     const loginRes = await fetchUserLogin(email, password);
-    console.log('loginRes', loginRes);
     const { access_token } = loginRes;
-
     setAccessToken(access_token);
     const res = fetchRecipes(access_token);
-    // console.log('res', res);
     const json = await res;
-    // console.log('json.recipes', json.recipes);
     const recipes = json.recipes.data;
     setRecipes(recipes);
-
   };
 
-  // useEffect(() => {
-  //   init();
-  // }, []);
   useEffect(() => {
     (async () => {
-
       init();
     })()
   }, []);
 
   const onClickFavoriteButton = async (id: number, isFavorite: boolean) => {
-
     const res = isFavorite === false
       ? await favoriteRecipe({ id, accessToken })
       : await unfavoriteRecipe({ id, accessToken });
-
     if (res.response == false) {
       return <div>保存できていません...</div>;
     }
@@ -67,8 +54,6 @@ const RecipeTop = () => {
         </div>
       </main>
     </DefaultLayout>
-
   );
 }
-
 export default RecipeTop;

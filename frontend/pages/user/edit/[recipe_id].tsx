@@ -8,7 +8,6 @@ import { fetchUserLogin } from '../../../apis/users';
 import { editRecipe } from '/apis/recipes';
 import { updateRecipe } from '/apis/recipes';
 
-
 type InputIngredient = {
     name: string;
     amount: string;
@@ -23,7 +22,6 @@ const UserRecipeEdit = () => {
     const [accessToken, setAccessToken] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdating, setIsUpdating] = useState(false);
-
     const initInputIngredients = [
         { name: '', amount: '' },
         { name: '', amount: '' },
@@ -31,7 +29,6 @@ const UserRecipeEdit = () => {
     ];
 
     const [inputIngredients, setInputIngredients] = useState<InputIngredient[]>(initInputIngredients);
-
     const onChangeIngredientName = (index: number) => {
         return (event) => {
             const ingredients = [...inputIngredients];
@@ -64,7 +61,6 @@ const UserRecipeEdit = () => {
             const email = 'yu375zit@gmail.com';
             const password = 'a529gjs8int';
             const loginRes = await fetchUserLogin(email, password);
-            console.log('loginRes', loginRes);
             const { access_token } = loginRes;
             const res = await editRecipe({ id: Number(recipe_id), accessToken: access_token });
             const { recipe } = res;
@@ -80,10 +76,8 @@ const UserRecipeEdit = () => {
             setInputIngredients(ingredients);
             setAccessToken(access_token);
             setIsLoading(false);
-
         })()
     }, [recipe_id]);
-
 
     const handleSubmit = async () => {
         setIsUpdating(true);
@@ -91,11 +85,9 @@ const UserRecipeEdit = () => {
         const ingredients = inputIngredients.filter(({ name, amount }) => {
             return name !== '' && amount !== ''
         });
-
         const res = await updateRecipe({
             id, title, description, imageFile, cost, accessToken, ingredients,
         });
-        // console.log('imageFile', imageFile);
 
         if (res.response == false) {
             return <div>保存できていません...</div>;
@@ -112,7 +104,6 @@ const UserRecipeEdit = () => {
 
     const handleChangeFile = (e: any) => {
         setImageFile(e.target.files[0]);
-        console.log('e.target.files[0]', e.target.files[0]);
     };
 
     return (
@@ -191,5 +182,4 @@ const UserRecipeEdit = () => {
         </UserDefaultLayout >
     );
 }
-
 export default UserRecipeEdit;

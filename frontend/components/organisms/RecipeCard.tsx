@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Recipe } from '../../types/recipe';
 import { favoriteRecipe } from '/apis/recipes';
 
-
 type RecipeCardProps = {
     recipe: Recipe;
     onClickFavoriteButton?: (id: number, isFavorite: boolean) => void;
@@ -16,20 +15,12 @@ type RecipeCardProps = {
  */
 
 export const RecipeCard = (props: RecipeCardProps) => {
-    // console.log('props', props);
-    // const router = useRouter();
-
     const { recipe, onClickFavoriteButton } = props;
-
-    // console.log('onClickfavoriteButton', onClickfavoriteButton);
-    console.log('recipe', recipe);
     const { id, title, image, cost, isFavorite } = recipe;
-
     const handleSubmit = () => {
         if (onClickFavoriteButton) {
             onClickFavoriteButton(id, isFavorite);
         }
-
     }
     return (
         <div className="rounded shadow overflow-hidden">

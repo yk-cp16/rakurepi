@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import { fetchUserLogin } from '../../apis/users'
 import { fetchUserFavorite } from '../../apis/recipes'
 
-
 const UserFavorite = () => {
   const [recipes, setRecipes] = useState([]);
   const router = useRouter();
@@ -18,19 +17,12 @@ const UserFavorite = () => {
       const email = 'yu375zit@gmail.com';
       const password = 'a529gjs8int';
       const loginRes = await fetchUserLogin(email, password);
-      // loginResからacces_tokenのみ取り出すことができる
-      console.log('loginRes', loginRes);
       const { access_token } = loginRes;
-      console.log('access_token', access_token);
       const res = await fetchUserFavorite(access_token);
-      console.log('APIres', res);
-      // console.log('res', res);
       const { recipes } = res;
-      console.log('recipes', recipes);
       setRecipes(recipes);
     })()
   }, []);
-
 
   return (
     <DefaultLayout>
@@ -48,5 +40,4 @@ const UserFavorite = () => {
     </DefaultLayout>
   );
 }
-
 export default UserFavorite;

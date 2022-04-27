@@ -6,19 +6,15 @@ import { fetchRecipesByRanking } from '../../apis/recipes'
 
 const Ranking = () => {
   const [recipes, setRecipes] = useState([]);
-
   const init = async () => {
     const res = await fetchRecipesByRanking();
     const { recipes } = res;
     setRecipes(recipes.slice(0, 3));
   };
 
-
   useEffect(() => {
     init();
   }, []);
-
-
 
   return (
     <DefaultLayout>
@@ -26,7 +22,6 @@ const Ranking = () => {
         コスパレシピランキング(TOP3)
       </h1>
       <main className={styles.main} >
-
         {recipes.map((recipe, index) => (
           <div key={index}>
             <div className="rounded-full h-12 w-12 flex items-center justify-center bg-blue-200 text-xl">{index + 1}位</div>
@@ -35,11 +30,8 @@ const Ranking = () => {
             </div>
           </div>
         ))}
-
       </main>
     </DefaultLayout >
-
   );
 }
-
 export default Ranking;
