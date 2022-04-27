@@ -21,10 +21,18 @@ export const UserDefaultLayout = ({ children }) => {
                             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="w-full sm:ml-30">
                                     <div className="flex justify-between">
-                                        <a href="/user/" className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">ラクレピ</a>
-                                        <a href="/user/create" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">新規作成</a>
-                                        <a href="/user/favorite" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
-                                        <a href="/login" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ログアウト</a>
+                                        <Link href="/user/" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">ラクレピ</a>
+                                        </Link>
+                                        <Link href="/user/create" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">新規作成</a>
+                                        </Link>
+                                        <Link href="/user/favorite" >
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
+                                        </Link>
+                                        <Link href="/login" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ログアウト</a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -38,16 +46,6 @@ export const UserDefaultLayout = ({ children }) => {
             </div>
 
             <footer className={styles.footer} >
-                <a
-                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Powered by{' '}
-                    <span className={styles.logo}>
-                        <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-                    </span>
-                </a>
             </footer>
         </>
     );

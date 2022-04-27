@@ -13,9 +13,11 @@ const Ranking = () => {
     setRecipes(recipes.slice(0, 3));
   };
 
+
   useEffect(() => {
     init();
   }, []);
+
 
 
   return (

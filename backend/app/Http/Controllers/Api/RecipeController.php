@@ -83,6 +83,7 @@ class RecipeController extends Controller
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
             $target_path = public_path('/storage/image');
+            var_dump($target_path);
             $file->move($target_path, $fileName);
         } else {
             $fileName = "";
@@ -95,8 +96,8 @@ class RecipeController extends Controller
         DB::transaction(function () use ($recipe, $request) {
             // 更新処理
             $recipe->save();
-
             // dd($request->input('ingredients', []));
+            var_dump($$request->input('ingredients', []));
             $recipe->recipe_ingredients()->createMany($request->input('ingredients', []));
         });
 
@@ -105,15 +106,6 @@ class RecipeController extends Controller
             'isSuccess' => true,
             'message' => 'レシピの作成に成功しました'
         ];
-
-        // サンプル: 失敗時のレスポンス
-        // $response = [
-        //     'isSuccess' => false,
-        //     'messages' => [
-        //         'タイトルが空です',
-        //         '説明が100文字を超えています'
-        //     ]
-        // ];
 
         return response()->json(['response' => $response]);
     }
@@ -137,6 +129,9 @@ class RecipeController extends Controller
                     "file_path" => $path
                 ]);
             }
+        } else {
+            $path = $request->image->store('public/image');
+            dd($path);
         }
 
         $response = [
@@ -166,11 +161,19 @@ class RecipeController extends Controller
         $recipe->user_id = Auth::id();
         $recipeForm = $request->all();
 
+        // var_dump($recipeForm);
         if ($request->remove == 'true') {
             $recipeForm['image'] = null;
         } elseif ($request->file('image')) {
-            $path = $request->file('image')->store('public/image');
-            $recipeForm['image'] = basename($path);
+            // $path = $request->file('image')->store('public/image');
+            // var_dump($path);
+            // $recipeForm['image'] = basename($path);
+            // var_dump($recipeForm['image']);
+            $file = $request->image;
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = public_path('/storage/image');
+            $file->move($target_path, $fileName);
+            $recipeForm['image'] = $fileName;
         } else {
             $recipeForm['image'] = $recipe->image;
         }
@@ -195,7 +198,7 @@ class RecipeController extends Controller
 
     public function delete(Request $request)
     {
-        var_dump($request->id);
+        var_dump('request', $request);
         $recipe = Recipe::find($request->id);
         $recipe->delete();
         $response = [
@@ -229,7 +232,6 @@ class RecipeController extends Controller
             'message' => 'お気に入りレシピの保存に成功しました'
         ];
         return response()->json(['response' => $response]);
-        // return redirect()->route('top');
     }
 
     public function unfavorite(Request $request)

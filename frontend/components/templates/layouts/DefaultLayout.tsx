@@ -21,12 +21,26 @@ export const DefaultLayout = ({ children }) => {
                             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="w-full sm:ml-30">
                                     <div className="flex justify-between">
-                                        <a href="/recipe/" className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">ラクレピ</a>
-                                        <a href="/recipe/about" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">about</a>
-                                        <a href="/recipe/search" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">検索</a>
-                                        <a href="/recipe/ranking" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ランキング</a>
-                                        <a href="/user/favorite" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
-                                        <a href="/login" className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ログイン</a>
+                                        <Link href="/recipe/" passHref>
+                                            <a
+                                                className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">
+                                                ラクレピ</a>
+                                        </Link>
+                                        <Link href="/recipe/about" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">about</a>
+                                        </Link>
+                                        <Link href="/recipe/search" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">検索</a>
+                                        </Link>
+                                        <Link href="/recipe/ranking" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ランキング</a>
+                                        </Link>
+                                        <Link href="/user/favorite" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
+                                        </Link>
+                                        <Link href="/login" passHref>
+                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ログイン</a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +54,7 @@ export const DefaultLayout = ({ children }) => {
             {/* </div> */}
 
             <footer className={styles.footer} >
-                <a
+                {/* <a
                     href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -49,7 +63,7 @@ export const DefaultLayout = ({ children }) => {
                     <span className={styles.logo}>
                         <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
                     </span>
-                </a>
+                </a> */}
             </footer>
         </>
     );
