@@ -16,17 +16,13 @@ type RecipeCardProps = {
  * @param props {@link RecipeCardProps}
  */
 export const UserRecipeCard = (props: RecipeCardProps) => {
-
     const [accessToken, setAccessToken] = useState('');
     const router = useRouter();
-
     const { recipe, onClickdeleteButton } = props;
-    // console.log('onClickdeleteButton', onClickdeleteButton);
     const { id, title, image, cost } = recipe;
 
     useEffect(() => {
         (async () => {
-            console.log('recipe', recipe);
             if (!recipe) return;
             const email = 'yu375zit@gmail.com';
             const password = 'a529gjs8int';
@@ -40,7 +36,6 @@ export const UserRecipeCard = (props: RecipeCardProps) => {
         onClickdeleteButton(id);
         location.reload();
     }
-
 
     return (
         <div className="rounded shadow overflow-hidden">
@@ -76,6 +71,5 @@ export const UserRecipeCard = (props: RecipeCardProps) => {
                 </div>
             </div >
         </div >
-
     );
 }

@@ -44,7 +44,6 @@ export const UserDefaultLayout = ({ children }) => {
             <div className={styles.container} >
                 {children}
             </div>
-
             <footer className={styles.footer} >
             </footer>
         </>

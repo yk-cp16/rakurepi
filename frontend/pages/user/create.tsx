@@ -30,12 +30,6 @@ const UserRecipeCreate = () => {
     const [inputIngredients, setInputIngredients] = useState<InputIngredient[]>(initInputIngredients);
 
     const router = useRouter();
-    // const numbers = [1, 2, 3];
-    // const numbers2 = [4, 5, 6];
-    // ...numbers => 1, 2, 3
-    // [...numbers] => [1, 2, 3]
-    // [...numbers, ...numbers2] => [1, 2, 3, 4, 5, 6]
-    // [0, ...numbers] => [0, 1, 2, 3]
 
     const onChangeIngredientName = (index: number) => {
         return (event) => {
@@ -65,7 +59,6 @@ const UserRecipeCreate = () => {
             const email = 'yu375zit@gmail.com';
             const password = 'a529gjs8int';
             const loginRes = await fetchUserLogin(email, password);
-            console.log('loginRes', loginRes);
             const { access_token } = loginRes;
             setAccessToken(access_token);
         })()
@@ -76,7 +69,6 @@ const UserRecipeCreate = () => {
         const ingredients = inputIngredients.filter(({ name, amount }) => {
             return name !== '' && amount !== ''
         });
-        // console.log('title', title);
         const res = await createRecipe({
             title, description, imageFile, cost, accessToken, ingredients,
         });
@@ -91,7 +83,6 @@ const UserRecipeCreate = () => {
 
     const handleChangeFile = (e: any) => {
         setImageFile(e.target.files[0]);
-        console.log('e.target.files[0]', e.target.files[0]);
     };
 
     return (
@@ -141,7 +132,6 @@ const UserRecipeCreate = () => {
                                     </div>
                                 </div>
                             ))}
-
                         </div>
                         <div className="form-group row mb-3">
                             <label className="col-md-4 col-form-label text-md-right">内容</label>
@@ -164,5 +154,4 @@ const UserRecipeCreate = () => {
         </UserDefaultLayout >
     );
 }
-
 export default UserRecipeCreate;

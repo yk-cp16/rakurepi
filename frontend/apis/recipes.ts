@@ -1,15 +1,9 @@
 import { HOSTS, ENDPOINTS } from '/consts/apis';
 
-
-// TODO: 他のAPI処理をこのファイルに移す
-
 export const fetchRecipesBySearchWord = async (searchWord: string) => {
-    // console.log('searchWord', searchWord);
     const fetchRes = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.SEARCH_RECIPE}${searchWord}`);
-    console.log('fetchRes', fetchRes);
     return fetchRes.json();
 };
-
 
 export const fetchRecipeByRecipeId = async (recipe_id) => {
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.RECIPE_DETAIL}${recipe_id}`);
@@ -26,10 +20,7 @@ export const fetchRecipesByRanking = async () => {
     return res.json();
 }
 
-
 export const fetchMyRecipes = async (accessToken) => {
-    // console.log('accessToken', accessToken);
-
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_RECIPE}`, {
         method: 'GET',
         // credentials: 'include',
@@ -38,13 +29,10 @@ export const fetchMyRecipes = async (accessToken) => {
             'Authorization': `Bearer ${accessToken}`
         }
     });
-    console.log('res', res);
     return await res.json();
 }
 
 export const fetchRecipes = async (accessToken) => {
-    // console.log('accessToken', accessToken);
-
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.RECIPE}`, {
         method: 'GET',
         // credentials: 'include',
@@ -53,16 +41,12 @@ export const fetchRecipes = async (accessToken) => {
             'Authorization': `Bearer ${accessToken}`
         }
     });
-    console.log('res', res);
     return await res.json();
 }
 
 export const createRecipe = async (props) => {
     const { title, description, imageFile, cost, accessToken, ingredients } = props;
-    console.log('title', title);
-
     const url = `${HOSTS.LOCAL}${ENDPOINTS.USER_CREATE_RECIPE}`;
-
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -94,8 +78,6 @@ type EditRecipeProps = {
 
 export const editRecipe = async (props: EditRecipeProps) => {
     const { id, accessToken } = props;
-    console.log('recipeId_after', id);
-
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_EDIT_RECIPE}${id
         }`, {
         method: 'GET',
@@ -104,19 +86,12 @@ export const editRecipe = async (props: EditRecipeProps) => {
             'Authorization': `Bearer ${accessToken}`
         },
     });
-    console.log('headerRes', res);
-
     return res.json();
 }
 
 export const updateRecipe = async (props) => {
-    console.log('props', props);
     const { id, title, description, imageFile, cost, accessToken, ingredients } = props;
-
     const url = `${HOSTS.LOCAL}${ENDPOINTS.USER_UPDATE_RECIPE}`;
-    // const ingredientsLoop = filteredInputIngredients.length;
-    console.log('url', url);
-
     const formData = new FormData();
     formData.append('id', id);
     formData.append('title', title);
@@ -139,7 +114,6 @@ export const updateRecipe = async (props) => {
             body: formData
         }
     );
-    console.log('updateRes2', res);
     return res.json();
 };
 
@@ -153,7 +127,6 @@ export const fetchUserFavorite = async (accessToken) => {
             'Authorization': `Bearer ${accessToken}`
         }
     });
-    console.log('res', res);
     return res.json();
 }
 
@@ -192,9 +165,7 @@ export const unfavoriteRecipe = async (props) => {
     return res.json();
 }
 
-
 export const deleteRecipe = async (props) => {
-    // console.log('props', props);
     const { id, accessToken } = props;
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_DELETE_RECIPE
         }`, {
@@ -207,6 +178,5 @@ export const deleteRecipe = async (props) => {
         },
         body: JSON.stringify({ id }),
     });
-
     return res.json();
 }

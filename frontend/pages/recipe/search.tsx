@@ -7,7 +7,6 @@ import { fetchRecipesBySearchWord } from '/apis/recipes';
 const Search = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [searchWord, setSearchWord] = useState('');
-
   const handleSubmit = async () => {
     const res = await fetchRecipesBySearchWord(searchWord);
     const { recipes } = res;
@@ -36,9 +35,6 @@ const Search = () => {
             </div>
           </form>
           <div>
-
-
-
             {searchedRecipes.map((recipe, index) => (
               <RecipeCard key={index} recipe={recipe} />
             ))}
@@ -46,8 +42,6 @@ const Search = () => {
         </div>
       </main >
     </DefaultLayout>
-
   );
 }
-
 export default Search;

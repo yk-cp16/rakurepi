@@ -1,11 +1,9 @@
 import styles from '../../styles/Home.module.css'
 import { DefaultLayout } from '../../components/templates/layouts/DefaultLayout';
 
-
 const About = () => {
   return (
     <DefaultLayout>
-
       <div className="text-center text-5xl mt-6 mb-3 font-semibold tracking-wide">
         <h1>ラクレピとは？</h1>
       </div>
@@ -39,7 +37,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
     </DefaultLayout >
   );
 }

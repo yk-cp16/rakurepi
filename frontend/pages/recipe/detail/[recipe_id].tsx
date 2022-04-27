@@ -2,7 +2,6 @@ import styles from '../../../styles/Home.module.css'
 import React, { useState, useEffect } from 'react';
 import { DefaultLayout } from '../../../components/templates/layouts/DefaultLayout';
 import { useRouter } from "next/router";
-
 import Image from "next/image"
 import { Recipe } from '../../../types/recipe';
 import { fetchRecipeByRecipeId } from '../../../apis/recipes';
@@ -10,38 +9,20 @@ import { fetchRecipeByRecipeId } from '../../../apis/recipes';
 const RecipeShow = () => {
   const router = useRouter();
   const { recipe_id } = router.query;
-
   const [recipe, setRecipe] = useState(null);
-
-  console.log('recipe_id', recipe_id);
 
   useEffect(() => {
     (async () => {
       if (!recipe_id) return;
-
       const res = await fetchRecipeByRecipeId(recipe_id);
-      // console.log('res', res);
       const json = await res.json();
       const { recipe } = json;
-      console.log('recipe', recipe);
-
       setRecipe(recipe)
     })()
   }, [recipe_id]);
 
-
   if (recipe === null) return <div>Loading...</div>;
-
   const recipeDescription = recipe.description;
-  // const text = 'なにぬねの\n\nはひふへほ';
-  // return (
-  //   <div>
-  //     {recipeDescription.split('\n').map(t => (
-  //       t !== '' ? <div>{t}</div> : <br />
-  //     ))}
-  //   </div>
-  // );
-
 
   return (
     <DefaultLayout>
@@ -55,7 +36,6 @@ const RecipeShow = () => {
       </div>
       <div className="text-center">
         <Image src={`http://localhost:8000/storage/image/${recipe.image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={650} height={400} />
-
       </div>
       <div className="mt-8">
         <div className="w-1/2 mx-auto">
