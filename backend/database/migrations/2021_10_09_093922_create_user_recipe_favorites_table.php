@@ -16,14 +16,10 @@ class CreateUserRecipeFavoritesTable extends Migration
         // TODO: レシピIDとuserIDでユニークキー制約をかける
 
         Schema::create('user_recipe_favorites', function (Blueprint $table) {
-            if (!$table->integer('recipe_id' || $table->integer('user_id'))) {
-                return redirect("/recipe");
-            } else {
-                $table->increments('id');
-                $table->integer('recipe_id');
-                $table->integer('user_id');
-                $table->timestamps();
-            }
+            $table->increments('id');
+            $table->integer('recipe_id');
+            $table->integer('user_id');
+            $table->timestamps();
         });
     }
 
