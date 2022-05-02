@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image"
 import { Recipe } from '../../../types/recipe';
 import { fetchRecipeByRecipeId } from '../../../apis/recipes';
+import { HOSTS } from '/consts/apis';
 
 const RecipeShow = () => {
   const router = useRouter();
@@ -35,7 +36,7 @@ const RecipeShow = () => {
         </h3>
       </div>
       <div className="text-center">
-        <Image src={`http://localhost:8000/storage/image/${recipe.image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={650} height={400} />
+        <Image src={`${HOSTS.LOCAL}/storage/image/${recipe.image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={650} height={400} />
       </div>
       <div className="mt-8">
         <div className="w-1/2 mx-auto">
