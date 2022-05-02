@@ -1,10 +1,6 @@
 import Link from 'next/link';
 import Image from "next/image"
 import { Recipe } from '../../types/recipe';
-import { useState, useEffect } from 'react';
-import { fetchUserLogin } from '../../apis/users';
-import { useRouter } from 'next/router';
-import { deleteRecipe } from '/apis/recipes';
 
 type RecipeCardProps = {
     recipe: Recipe
@@ -16,25 +12,11 @@ type RecipeCardProps = {
  * @param props {@link RecipeCardProps}
  */
 export const UserRecipeCard = (props: RecipeCardProps) => {
-    const [accessToken, setAccessToken] = useState('');
-    const router = useRouter();
     const { recipe, onClickdeleteButton } = props;
     const { id, title, image, cost } = recipe;
 
-    useEffect(() => {
-        (async () => {
-            if (!recipe) return;
-            const email = 'yu375zit@gmail.com';
-            const password = 'a529gjs8int';
-            const loginRes = await fetchUserLogin(email, password);
-            const { access_token } = loginRes;
-            setAccessToken(access_token);
-        })()
-    }, []);
-
     const handleSubmit = () => {
         onClickdeleteButton(id);
-        location.reload();
     }
 
     return (

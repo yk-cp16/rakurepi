@@ -1,10 +1,7 @@
-import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../../../styles/Home.module.css'
 import React, { useState, useEffect } from 'react';
 import { UserDefaultLayout } from '../../../components/templates/layouts/UserDefaultLayout';
 import { useRouter } from 'next/router';
-import { fetchUserLogin } from '../../../apis/users';
 import { editRecipe } from '/apis/recipes';
 import { updateRecipe } from '/apis/recipes';
 
@@ -19,7 +16,6 @@ const UserRecipeEdit = () => {
     const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [accessToken, setAccessToken] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdating, setIsUpdating] = useState(false);
     const initInputIngredients = [
@@ -58,11 +54,7 @@ const UserRecipeEdit = () => {
         (async () => {
             // 重複を防ぐ
             if (!recipe_id) return;
-            const email = 'yu375zit@gmail.com';
-            const password = 'a529gjs8int';
-            const loginRes = await fetchUserLogin(email, password);
-            const { access_token } = loginRes;
-            const res = await editRecipe({ id: Number(recipe_id), accessToken: access_token });
+            const res = await editRecipe({ id: Number(recipe_id) });
             const { recipe } = res;
             const { title, description, cost, image, recipe_ingredients } = recipe;
             const ingredients = recipe_ingredients.map(({ name, amount }) => {
@@ -74,7 +66,6 @@ const UserRecipeEdit = () => {
             setTitle(title);
             setDescription(description);
             setInputIngredients(ingredients);
-            setAccessToken(access_token);
             setIsLoading(false);
         })()
     }, [recipe_id]);
@@ -86,7 +77,7 @@ const UserRecipeEdit = () => {
             return name !== '' && amount !== ''
         });
         const res = await updateRecipe({
-            id, title, description, imageFile, cost, accessToken, ingredients,
+            id, title, description, imageFile, cost, ingredients,
         });
 
         if (res.response == false) {

@@ -4,24 +4,17 @@ import { DefaultLayout } from '../../components/templates/layouts/DefaultLayout'
 import { RecipeCard } from '../../components/organisms/RecipeCard';
 import { Recipe } from '../../types/recipe';
 import Image from "next/image"
-import { fetchRecipes, fetchRecipesIndex, favoriteRecipe, unfavoriteRecipe } from '../../apis/recipes';
-import { fetchUserLogin } from '../../apis/users';
-import { useRouter } from 'next/router';
+import { fetchRecipes, favoriteRecipe, unfavoriteRecipe } from '../../apis/recipes';
+
 
 const RecipeTop = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [accessToken, setAccessToken] = useState('');
-  const router = useRouter();
 
   const init = async () => {
-    const email = 'yu375zit@gmail.com';
-    const password = 'a529gjs8int';
-    const loginRes = await fetchUserLogin(email, password);
-    const { access_token } = loginRes;
-    setAccessToken(access_token);
-    const res = fetchRecipes(access_token);
+    const res = fetchRecipes();
     const json = await res;
     const recipes = json.recipes.data;
+    console.log('recipes', recipes)
     setRecipes(recipes);
   };
 
@@ -33,8 +26,8 @@ const RecipeTop = () => {
 
   const onClickFavoriteButton = async (id: number, isFavorite: boolean) => {
     const res = isFavorite === false
-      ? await favoriteRecipe({ id, accessToken })
-      : await unfavoriteRecipe({ id, accessToken });
+      ? await favoriteRecipe({ id })
+      : await unfavoriteRecipe({ id });
     if (res.response == false) {
       return <div>保存できていません...</div>;
     }

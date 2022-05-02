@@ -83,7 +83,6 @@ class RecipeController extends Controller
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
             $target_path = public_path('/storage/image');
-            var_dump($target_path);
             $file->move($target_path, $fileName);
         } else {
             $fileName = "";
@@ -92,12 +91,9 @@ class RecipeController extends Controller
         $recipe->fill($request->all());
         $recipe->user_id = Auth::id();
         $recipe->image = $fileName;
-        // var_dump($recipe);
         DB::transaction(function () use ($recipe, $request) {
             // 更新処理
             $recipe->save();
-            // dd($request->input('ingredients', []));
-            var_dump($$request->input('ingredients', []));
             $recipe->recipe_ingredients()->createMany($request->input('ingredients', []));
         });
 
@@ -198,7 +194,6 @@ class RecipeController extends Controller
 
     public function delete(Request $request)
     {
-        var_dump('request', $request);
         $recipe = Recipe::find($request->id);
         $recipe->delete();
         $response = [
@@ -236,8 +231,6 @@ class RecipeController extends Controller
 
     public function unfavorite(Request $request)
     {
-        // TODO: user_idとrecipe_idが正しい値かバリデーションする
-        //TODO: 片方でも欠けてれば400番エラーにする
         $recipe = UserRecipeFavorite::where('user_id', Auth::id())
             ->where(
                 'recipe_id',
