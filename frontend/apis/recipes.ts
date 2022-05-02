@@ -1,7 +1,7 @@
 import { HOSTS, ENDPOINTS } from '/consts/apis';
 
 export const fetchRecipesBySearchWord = async (searchWord: string) => {
-    const fetchRes = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.SEARCH_RECIPE}${searchWord}`);
+    const fetchRes = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.SEARCH_RECIPE}/${searchWord}`);
     return fetchRes.json();
 };
 
