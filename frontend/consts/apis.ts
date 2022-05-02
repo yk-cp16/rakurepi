@@ -3,9 +3,9 @@ export const HOSTS = {
 } as const;
 
 export const ENDPOINTS = {
-    SEARCH_RECIPE: '/api/recipe/search/',
+    SEARCH_RECIPE: '/api/recipe/search',
     RECIPE_DETAIL: '/api/recipe/detail/',
-    RECIPE: '/api/recipe/',
+    RECIPE: '/api/recipe',
     RANKING_RECIPE: '/api/recipe/ranking',
     LOGIN: '/api/auth/login',
     USER_RECIPE: '/api/user/recipe',
