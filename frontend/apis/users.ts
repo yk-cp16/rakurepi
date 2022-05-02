@@ -10,7 +10,13 @@ export const fetchUserLogin = async (email, password) => {
         },
         body: JSON.stringify({ email, password }),
     });
-    return res.json();
+
+    const { access_token } = await res.json();
+    if (!access_token) {
+        return false;
+    }
+    localStorage.setItem('auth', access_token);
+    return true;
 };
 
 

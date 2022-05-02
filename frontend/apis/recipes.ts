@@ -20,7 +20,11 @@ export const fetchRecipesByRanking = async () => {
     return res.json();
 }
 
-export const fetchMyRecipes = async (accessToken) => {
+export const fetchMyRecipes = async () => {
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_RECIPE}`, {
         method: 'GET',
         // credentials: 'include',
@@ -32,7 +36,12 @@ export const fetchMyRecipes = async (accessToken) => {
     return await res.json();
 }
 
-export const fetchRecipes = async (accessToken) => {
+export const fetchRecipes = async () => {
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.RECIPE}`, {
         method: 'GET',
         // credentials: 'include',
@@ -45,7 +54,11 @@ export const fetchRecipes = async (accessToken) => {
 }
 
 export const createRecipe = async (props) => {
-    const { title, description, imageFile, cost, accessToken, ingredients } = props;
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+    const { title, description, imageFile, cost, ingredients } = props;
     const url = `${HOSTS.LOCAL}${ENDPOINTS.USER_CREATE_RECIPE}`;
     const formData = new FormData();
     formData.append('title', title);
@@ -56,6 +69,7 @@ export const createRecipe = async (props) => {
         formData.append(`ingredients[${i}][name]`, name);
         formData.append(`ingredients[${i}][amount]`, amount);
     })
+
     const res = await fetch(url,
         {
             method: 'POST',
@@ -73,11 +87,14 @@ export const createRecipe = async (props) => {
 
 type EditRecipeProps = {
     id: number;
-    accessToken: string;
 }
 
 export const editRecipe = async (props: EditRecipeProps) => {
-    const { id, accessToken } = props;
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+    const { id } = props;
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_EDIT_RECIPE}${id
         }`, {
         method: 'GET',
@@ -90,7 +107,11 @@ export const editRecipe = async (props: EditRecipeProps) => {
 }
 
 export const updateRecipe = async (props) => {
-    const { id, title, description, imageFile, cost, accessToken, ingredients } = props;
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+    const { id, title, description, imageFile, cost, ingredients } = props;
     const url = `${HOSTS.LOCAL}${ENDPOINTS.USER_UPDATE_RECIPE}`;
     const formData = new FormData();
     formData.append('id', id);
@@ -118,7 +139,11 @@ export const updateRecipe = async (props) => {
 };
 
 // お気に入りレシピ一覧
-export const fetchUserFavorite = async (accessToken) => {
+export const fetchUserFavorite = async () => {
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_RECIPE_FAVORITE
         }`, {
         method: 'GET',
@@ -132,7 +157,11 @@ export const fetchUserFavorite = async (accessToken) => {
 
 // お気に入り追加
 export const favoriteRecipe = async (props) => {
-    const { id, accessToken } = props;
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+    const { id } = props;
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_RECIPE_FAVORITE
         }`, {
         method: 'POST',
@@ -149,7 +178,11 @@ export const favoriteRecipe = async (props) => {
 
 // お気に入り解除
 export const unfavoriteRecipe = async (props) => {
-    const { id, accessToken } = props;
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+    const { id } = props;
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_RECIPE_FAVORITE
         }`, {
         method: 'POST',
@@ -166,7 +199,11 @@ export const unfavoriteRecipe = async (props) => {
 }
 
 export const deleteRecipe = async (props) => {
-    const { id, accessToken } = props;
+    const accessToken = localStorage.getItem('auth');
+    if (!accessToken) {
+        return;
+    }
+    const { id } = props;
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.USER_DELETE_RECIPE
         }`, {
         method: 'DELETE',

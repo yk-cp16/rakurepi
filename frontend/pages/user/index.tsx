@@ -5,22 +5,15 @@ import React, { useState, useEffect } from 'react';
 import { UserDefaultLayout } from '../../components/templates/layouts/UserDefaultLayout';
 import { UserRecipeCard } from '../../components/organisms/UserRecipeCard';
 import { useRouter } from 'next/router';
-import { fetchUserLogin } from '../../apis/users';
-import { deleteRecipe, fetchMyRecipes, fetchRecipes } from '../../apis/recipes';
+import { deleteRecipe, fetchMyRecipes } from '../../apis/recipes';
 
 const UserIndex = () => {
   const [recipes, setRecipes] = useState([]);
-  const [accessToken, setAccessToken] = useState('');
   const router = useRouter();
 
   useEffect(() => {
     (async () => {
-      const email = 'yu375zit@gmail.com';
-      const password = 'a529gjs8int';
-      const loginRes = await fetchUserLogin(email, password);
-      const { access_token } = loginRes;
-      setAccessToken(access_token);
-      const res = await fetchMyRecipes(access_token);
+      const res = await fetchMyRecipes();
       if (!res.recipes) {
         router.push('/login');
         return
@@ -31,12 +24,12 @@ const UserIndex = () => {
   }, []);
 
   const deleteRecipeId = async (id: number) => {
-    const res = await deleteRecipe({ id, accessToken });
-    if (res.response == true) {
-      return location.reload();
-    } else {
-      return <div>保存できていません...</div>;
+    const res = await deleteRecipe({ id });
+    if (!res.response?.isSuccess) {
+      alert('レシピ削除に失敗しました。');
+      return;
     }
+    return location.reload();
   }
 
   return (

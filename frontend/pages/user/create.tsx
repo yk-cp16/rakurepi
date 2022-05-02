@@ -1,10 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../../styles/Home.module.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { UserDefaultLayout } from '../../components/templates/layouts/UserDefaultLayout';
 import { useRouter } from 'next/router';
-import { fetchUserLogin } from '../../apis/users';
 import { createRecipe } from '/apis/recipes';
 
 type InputIngredient = {
@@ -18,7 +14,6 @@ const UserRecipeCreate = () => {
     const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [accessToken, setAccessToken] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
 
     const initInputIngredients = [
@@ -53,16 +48,6 @@ const UserRecipeCreate = () => {
         setInputIngredients(ingredients);
     }
 
-    useEffect(() => {
-        (async () => {
-            // 重複を防ぐ
-            const email = 'yu375zit@gmail.com';
-            const password = 'a529gjs8int';
-            const loginRes = await fetchUserLogin(email, password);
-            const { access_token } = loginRes;
-            setAccessToken(access_token);
-        })()
-    }, []);
 
     const handleSubmit = async () => {
         setIsUpdating(true);
@@ -70,15 +55,17 @@ const UserRecipeCreate = () => {
             return name !== '' && amount !== ''
         });
         const res = await createRecipe({
-            title, description, imageFile, cost, accessToken, ingredients,
+            title, description, imageFile, cost, ingredients,
         });
 
-        if (res.response == false) {
-            return <div>保存できていません...</div>;
-        } router.push('/user');
-
+        if (!res.response?.isSuccess) {
+            setIsUpdating(false);
+            alert('保存できていません。');
+            return;
+        }
         alert('レシピ新規作成しました。');
         setIsUpdating(false);
+        router.push('/user');
     }
 
     const handleChangeFile = (e: any) => {
