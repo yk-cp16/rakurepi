@@ -27,7 +27,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
                     <Link href={`/recipe/detail/${id}`}>
                         <a>
                             <div>
-                                <Image src={`http://localhost:8000/storage/image/${image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
+                                <Image src={`/storage/image/${image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
                             </div>
                         </a>
                     </Link>
