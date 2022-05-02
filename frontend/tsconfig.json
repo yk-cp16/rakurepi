@@ -32,7 +32,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/login.js",
+    "pages/login.tsx",
     "pages/index.js",
     "pages/index.tsx",
     "pages/app.js",
