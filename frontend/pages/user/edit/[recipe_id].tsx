@@ -4,6 +4,7 @@ import { UserDefaultLayout } from '../../../components/templates/layouts/UserDef
 import { useRouter } from 'next/router';
 import { editRecipe } from '/apis/recipes';
 import { updateRecipe } from '/apis/recipes';
+import { HOSTS } from '/consts/apis';
 
 type InputIngredient = {
     name: string;
@@ -110,7 +111,7 @@ const UserRecipeEdit = () => {
                                 選択中:画像を変更してください
                             </label>
                             <div className="col-md-6">
-                                <Image src={`http://localhost:8000/storage/image/${recipeImagePath}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={50} height={50} />
+                                <Image src={`${HOSTS.LOCAL}/storage/image/${recipeImagePath}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={50} height={50} />
                                 <div className="col-md-6">
                                     <input type="file" name="file" className="form-control-file" accept="image/*" onChange={handleChangeFile} />
                                 </div>

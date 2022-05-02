@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from "next/image"
 import { Recipe } from '../../types/recipe';
+import { HOSTS } from '/consts/apis';
 
 type RecipeCardProps = {
     recipe: Recipe
@@ -25,7 +26,7 @@ export const UserRecipeCard = (props: RecipeCardProps) => {
                 <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                     <Link href={`/recipe/detail/${id}`}>
                         <a>
-                            <Image src={`http://localhost:8000/storage/image/${image}`} alt="cookImage" className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
+                            <Image src={`${HOSTS.LOCAL}/storage/image/${image}`} alt="cookImage" className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
                             <div className=" flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">

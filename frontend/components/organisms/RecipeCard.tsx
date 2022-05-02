@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from "next/image"
 import { Recipe } from '../../types/recipe';
+import { HOSTS } from '/consts/apis';
 
 type RecipeCardProps = {
     recipe: Recipe;
@@ -27,7 +28,7 @@ export const RecipeCard = (props: RecipeCardProps) => {
                     <Link href={`/recipe/detail/${id}`}>
                         <a>
                             <div>
-                                <Image src={`/storage/image/${image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
+                                <Image src={`${HOSTS.LOCAL}/storage/image/${image}`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={500} height={300} />
                             </div>
                         </a>
                     </Link>

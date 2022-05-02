@@ -5,6 +5,7 @@ import { RecipeCard } from '../../components/organisms/RecipeCard';
 import { Recipe } from '../../types/recipe';
 import Image from "next/image"
 import { fetchRecipes, favoriteRecipe, unfavoriteRecipe } from '../../apis/recipes';
+import { HOSTS } from '/consts/apis';
 
 
 const RecipeTop = () => {
@@ -37,7 +38,7 @@ const RecipeTop = () => {
 
   return (
     <DefaultLayout>
-      <Image src="http://localhost:8000/storage/food-top.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={1700} height={800} />
+      <Image src={`${HOSTS.LOCAL}/storage/food-top.jpg`} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" width={1700} height={800} />
       <main className={styles.main} >
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
           {recipes.map((recipe, index) => (
