@@ -17,24 +17,6 @@ const About = () => {
               <li>ぱっと見て作れるレシピサイトを作りたいと思いました。</li>
             </div>
           </div>
-          <div className="text-2xl mt-12">
-            <ul className="text-3xl">
-              <li>【フロント側の機能一覧(Next.jsで実装)】</li>
-            </ul>
-            <div className="ml-8">
-              <li>レシピ一覧表示・詳細ページ</li>
-              <li>タイトル検索</li>
-              <li>コストパフォーマンス別ランキング</li>
-            </div>
-            <ul className="text-3xl mt-10">
-              <li>【サーバー側の機能一覧(Laravelで実装)】</li>
-            </ul>
-            <div className="ml-8 mb-10">
-              <li>ログイン認証機能</li>
-              <li>投稿、編集、削除機能</li>
-              <li>お気に入り追加、解除</li>
-            </div>
-          </div>
         </div>
       </div>
     </DefaultLayout >

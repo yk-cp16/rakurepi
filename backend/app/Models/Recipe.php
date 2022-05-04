@@ -21,7 +21,6 @@ class Recipe extends Model
 
     public function favorite()
     {
-        // return $this->belongsTo('App\Models\Favorite');
         return $this->hasMany('App\Models\UserRecipeFavorite');
     }
 

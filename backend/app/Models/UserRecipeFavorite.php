@@ -14,9 +14,4 @@ class UserRecipeFavorite extends Model
     {
         return $this->hasMany('App\Models\Recipe');
     }
-
-    // public function user()
-    // {
-    //     return $this->hasMany('App\Models\User');
-    // }
 }
