@@ -11,7 +11,6 @@ use App\Models\UserRecipeFavorite;
 
 class RecipeController extends Controller
 {
-
     public function top()
     {
         $favoriteRecipes = UserRecipeFavorite::where('user_id', Auth::id())->get();
@@ -21,7 +20,6 @@ class RecipeController extends Controller
         foreach ($recipes as $recipe) {
             $recipe->isFavorite = in_array($recipe->id, $favoriteRecipeIds);
         }
-
         return response()->json(['recipes' => $recipes]);
     }
 
@@ -29,10 +27,7 @@ class RecipeController extends Controller
     public function show($id)
     {
         $recipe = Recipe::with(['recipe_ingredients', 'user'])->find($id);
-        // dd($recipe);
-
         return response()->json(['recipe' => $recipe]);
-        // return view('recipes/show', compact('recipe'));
     }
 
     public function about()
@@ -46,20 +41,15 @@ class RecipeController extends Controller
     }
 
     public function search(Request $request)
-    // public function search($title)
     {
         $recipes = Recipe::with(['user'])->where('title', 'like', "%{$request->title}%")->get();
-        // dd($request->title);
-
         return response()->json(['recipes' => $recipes]);
-        // return view('recipes.search', compact('recipes'));
     }
 
     public function ranking()
     {
         $recipes = Recipe::with(['user'])->orderBy('cost', 'asc')->get();
         return response()->json(['recipes' => $recipes]);
-        // return view('recipes.ranking', compact('recipes'));
     }
 
     public function create()
@@ -70,16 +60,13 @@ class RecipeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // dd($user);
         $recipes = Recipe::with(['user'])->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(5);
-
         return response()->json(['recipes' => $recipes]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, Recipe::$rules);
-
         if ($file = $request->image) {
             $fileName = time() . $file->getClientOriginalName();
             $target_path = public_path('/storage/image');
@@ -97,24 +84,16 @@ class RecipeController extends Controller
             $recipe->recipe_ingredients()->createMany($request->input('ingredients', []));
         });
 
-        // 成功時のレスポンス
         $response = [
             'isSuccess' => true,
             'message' => 'レシピの作成に成功しました'
         ];
-
         return response()->json(['response' => $response]);
     }
 
     public function upload(Request $request)
     {
-        // validateがあると画像変更せずに更新するとエラーになる
-        // $request->validate([
-        //     'image' => 'required|file|image|mimes:png,jpeg'
-        // ]);
         $upload_image = $request->file('image');
-        // dd($upload_image);
-
         if ($upload_image) {
             //アップロードされた画像を保存する
             $path = $upload_image->store('public/image');
@@ -140,7 +119,6 @@ class RecipeController extends Controller
     public function edit(Request $request)
     {
         $recipe = Recipe::with(['recipe_ingredients', 'user'])->find($request->id);
-        // dd($recipe);
         return response()->json(['recipe' => $recipe]);
     }
 
@@ -157,14 +135,9 @@ class RecipeController extends Controller
         $recipe->user_id = Auth::id();
         $recipeForm = $request->all();
 
-        // var_dump($recipeForm);
         if ($request->remove == 'true') {
             $recipeForm['image'] = null;
         } elseif ($request->file('image')) {
-            // $path = $request->file('image')->store('public/image');
-            // var_dump($path);
-            // $recipeForm['image'] = basename($path);
-            // var_dump($recipeForm['image']);
             $file = $request->image;
             $fileName = time() . $file->getClientOriginalName();
             $target_path = public_path('/storage/image');
@@ -236,7 +209,6 @@ class RecipeController extends Controller
                 'recipe_id',
                 $request->recipe_id
             );
-        // var_dump($request->recipe_id);
 
         $recipe->delete();
         $response = [
@@ -245,6 +217,5 @@ class RecipeController extends Controller
         ];
 
         return response()->json(['response' => $response]);
-        // return redirect()->route('top');
     }
 }

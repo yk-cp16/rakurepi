@@ -8,16 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
-
-
     public function store(Request $request)
     {
         $favorite = new UserRecipeFavorite();
         $favorite->recipe_id = $request->recipe_id;
-        // dd($request);
         $favorite->user_id = Auth::user()->id;
         $favorite->save();
-
         return redirect()->route('top');
     }
 
@@ -27,6 +23,5 @@ class FavoriteController extends Controller
 
         $recipe->favorite()->delete();
         return redirect()->route('top');
-        // return redirect()->route('favorite', [$request->recipe_id]);
     }
 }
