@@ -15,7 +15,7 @@ const Login = () => {
       alert('ログイン情報が間違っています');
       return;
     }
-    router.push('/recipe');
+    router.push('/user');
   };
 
   return (

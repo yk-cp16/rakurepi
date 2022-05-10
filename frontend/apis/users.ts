@@ -1,4 +1,5 @@
 import { HOSTS, ENDPOINTS } from '/consts/apis';
+import { AUTH_KEY } from '/consts/auth';
 
 export const fetchUserLogin = async (email, password) => {
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.LOGIN}`, {
@@ -15,7 +16,7 @@ export const fetchUserLogin = async (email, password) => {
     if (!access_token) {
         return false;
     }
-    localStorage.setItem('auth', access_token);
+    localStorage.setItem(AUTH_KEY, access_token);
     return true;
 };
 

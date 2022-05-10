@@ -1,10 +1,11 @@
 import styles from '../../../styles/Home.module.css';
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
+import { useAuth } from './hooks/useAuth';
+
 
 export const UserDefaultLayout = ({ children }) => {
-
+    const { onClickLogout } = useAuth();
     return (
         <>
             <Head>
@@ -30,9 +31,8 @@ export const UserDefaultLayout = ({ children }) => {
                                         <Link href="/user/favorite" >
                                             <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
                                         </Link>
-                                        <Link href="/login" passHref>
-                                            <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ログアウト</a>
-                                        </Link>
+                                        <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                            onClick={onClickLogout}>ログアウト</a>
                                     </div>
                                 </div>
                             </div>
