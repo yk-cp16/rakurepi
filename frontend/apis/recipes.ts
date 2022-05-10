@@ -38,17 +38,16 @@ export const fetchMyRecipes = async () => {
 
 export const fetchRecipes = async () => {
     const accessToken = localStorage.getItem('auth');
-    if (!accessToken) {
-        return;
+    const headers = {
+        'Accept': 'application/json',
+    }
+    if (accessToken) {
+        headers['Authorization'] = `Bearer ${accessToken}`;
     }
 
     const res = await fetch(`${HOSTS.LOCAL}${ENDPOINTS.RECIPE}`, {
         method: 'GET',
-        // credentials: 'include',
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        }
+        headers
     });
     return res.json();
 }
