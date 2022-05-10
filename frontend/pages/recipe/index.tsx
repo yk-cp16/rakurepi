@@ -5,24 +5,19 @@ import { RecipeCard } from '../../components/organisms/RecipeCard';
 import { Recipe } from '../../types/recipe';
 import Image from "next/image"
 import { fetchRecipes, favoriteRecipe, unfavoriteRecipe } from '../../apis/recipes';
-import { HOSTS } from '/consts/apis';
 
 
 const RecipeTop = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   const init = async () => {
-    const res = fetchRecipes();
-    const json = await res;
+    const json = await fetchRecipes();
     const recipes = json.recipes.data;
-    console.log('recipes', recipes)
     setRecipes(recipes);
   };
 
   useEffect(() => {
-    (async () => {
-      init();
-    })()
+    init();
   }, []);
 
   const onClickFavoriteButton = async (id: number, isFavorite: boolean) => {
@@ -42,7 +37,6 @@ const RecipeTop = () => {
       <main className={styles.main} >
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
           {recipes.map((recipe, index) => (
-            // recipe、onClickfavoriteButtonはpropsである
             <RecipeCard key={index} recipe={recipe} onClickFavoriteButton={onClickFavoriteButton} />
           ))}
         </div>

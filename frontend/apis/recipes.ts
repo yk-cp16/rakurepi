@@ -50,7 +50,7 @@ export const fetchRecipes = async () => {
             'Authorization': `Bearer ${accessToken}`
         }
     });
-    return await res.json();
+    return res.json();
 }
 
 export const createRecipe = async (props) => {
