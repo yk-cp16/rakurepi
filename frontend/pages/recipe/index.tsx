@@ -5,6 +5,7 @@ import { RecipeCard } from '../../components/organisms/RecipeCard';
 import { Recipe } from '../../types/recipe';
 import Image from "next/image"
 import { fetchRecipes, favoriteRecipe, unfavoriteRecipe } from '../../apis/recipes';
+import { isAuth } from '/utility/handle-auth';
 
 
 const RecipeTop = () => {
@@ -37,7 +38,8 @@ const RecipeTop = () => {
       <main className={styles.main} >
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
           {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} onClickFavoriteButton={onClickFavoriteButton} />
+            <RecipeCard key={index} recipe={recipe}
+              onClickFavoriteButton={isAuth() ? onClickFavoriteButton : undefined} />
           ))}
         </div>
       </main>
