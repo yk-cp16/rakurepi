@@ -39,6 +39,11 @@ export const DefaultLayout = ({ children }) => {
                                         <Link href="/user/favorite" passHref>
                                             <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">お気に入り</a>
                                         </Link>
+                                        {isAuth() && (
+                                            <Link href="/user/" passHref>
+                                                <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">マイページ</a>
+                                            </Link>
+                                        )}
                                         <Link href="/login" passHref>
                                             {isAuth() ? (
                                                 <a className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
