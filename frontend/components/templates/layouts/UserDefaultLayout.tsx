@@ -22,7 +22,7 @@ export const UserDefaultLayout = ({ children }) => {
                             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="w-full sm:ml-30">
                                     <div className="flex justify-between">
-                                        <Link href="/user/" passHref>
+                                        <Link href="/recipe/" passHref>
                                             <a className="text-white hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium">ラクレピ</a>
                                         </Link>
                                         <Link href="/user/create" passHref>
